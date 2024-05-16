@@ -36,7 +36,7 @@ while True:
 
         ### Inclusos ###
         conexao = sqlite3.connect(db_path)
-        conexao.execute("INSERT INTO SUPLEMENTO (LOTE, PRODUTO, FORNECEDOR) VALUES (?,?,?)", ([values[Titulos[0]], values]))
+        conexao.execute("INSERT INTO SUPLEMENTO (LOTE, PRODUTO, FORNECEDOR) VALUES (?,?,?)", ([values[Titulos[0]], values[Titulos[1], values[Titulos[2]]]]))
         conexao.commit()
         conexao.close()
 
@@ -58,7 +58,7 @@ while True:
         window['Salvar'].update(disabled=True)
 
         conexao = sqlite3.connect(db_path)
-        conexao.execute("UPDATE SUPLEMENTO set PRODUTO = ?, FORNECEDOR = ? where LOTE = ?", ([values[Titulos[1], values[Titulos[2]]]]))
+        conexao.execute("UPDATE SUPLEMENTO set PRODUTO = ?, FORNECEDOR = ? where LOTE = ?", ([values[Titulos[1], values[Titulos[2], values[Titulos[3]]]]]))
         conexao.commit()
         conexao.close()
 
