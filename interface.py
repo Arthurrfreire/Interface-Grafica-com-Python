@@ -13,4 +13,9 @@ layout = [
 
 window = sg.Window('Sistema de gerencia de suplementos', layout)
 
-while True: 
+while True:
+
+    event, values = window.read()
+    print(values)
+
+    
