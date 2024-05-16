@@ -1,4 +1,14 @@
 import PySimpleGUI as sg
+import os
+import sqlite3
+
+diretorio_corrente = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(diretorio_corrente, 'database.db')
+
+conexao = sqlite3.connect(db_path)
+query = ('''CREATE TABLE IF NOT EXISTS SUPLEMENTO (LOTE CHAR(10), PRODUTO TEXT, FORNECEDOR TEXT)''')
+conexao.execute(query)
+conexao.close()
 
 dados=[]
 Titulos = ['Lote', 'Produtos', 'Fornecedor']
@@ -18,4 +28,15 @@ while True:
     event, values = window.read()
     print(values)
 
-    
+    if event == 'Adicionar':
+        dados.append([values[Titulos[0]], values[Titulos[1]], values[Titulos[2]]])
+        window['tabela'].update(values=dados)
+        for i in range(3): # Limpa as caixas de texto
+            window[Titulos[i]].update(values='')
+
+        ### Inclusos ###
+        conexao = sqlite3.connect(db_path)
+        conexao.execute("INSERT INTO SUPLEMENTO (LOTE, PRODUTO, FORNECEDOR) VALUES (?,?,?)", ([values[Titulos[0]], values]))
+        conexao.commit()
+        conexao.close()
+        
